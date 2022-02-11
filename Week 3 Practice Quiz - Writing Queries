@@ -1,9 +1,11 @@
+Try writing by yourself and try to understand each step.
+
 1.  How many albums does the artist Led Zeppelin have? 
 
 SELECT artistid,
-count (albumid) as total_album
+COUNT (albumid) AS total_album
 FROM albums
-WHERE artistid in (SELECT artistid
+WHERE artistid IN (SELECT artistid
     FROM artists
     WHERE name = 'Led Zeppelin')
 
@@ -14,7 +16,8 @@ WHERE artistid in (SELECT artistid
 SELECT tracks.unitprice,
 albums.title
 FROM tracks
-LEFT JOIN albums ON tracks.albumid = albums.albumid
+LEFT JOIN albums 
+ON tracks.albumid = albums.albumid
 WHERE albums.artistid In (SELECT artistid
     FROM artists
     WHERE name = 'Audioslave')
@@ -24,8 +27,8 @@ SELECT tracks.unitprice,
 albums.title
 FROM tracks
 FROM albums
-INNER JOIN artists on artists.artistid = albums.artistid
-INNER JOIN tracks on tracks.albumid = albums.albumid
+INNER JOIN artists ON artists.artistid = albums.artistid
+INNER JOIN tracks ON tracks.albumid = albums.albumid
 WHERE artists.name = 'Audioslave'
 
 3.  Find the first and last name of any customer who does not have an invoice. Are there any customers returned from the query?  
@@ -41,15 +44,15 @@ WHERE invoices.invoiceid is NULL
 4.  Find the total price for each album.
 
 SELECT albumid,
-unitprice * count (albumid) as total_price
+unitprice * COUNT (albumid) AS total_price
 FROM tracks
 GROUP BY albumid
 
 What is the total price for the album “Big Ones”?
 SELECT albumid,
-unitprice * count (albumid) as total_price
+unitprice * COUNT (albumid) AS total_price
 FROM tracks
-WHERE albumid in (SELECT albumid
+WHERE albumid IN (SELECT albumid
     FROM albums
     WHERE title ='Big Ones')
 
