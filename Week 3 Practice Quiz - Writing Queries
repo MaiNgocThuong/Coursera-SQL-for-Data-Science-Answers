@@ -26,7 +26,6 @@ WHERE albums.artistid In (SELECT artistid
 SELECT tracks.unitprice,
 albums.title
 FROM tracks
-FROM albums
 INNER JOIN artists ON artists.artistid = albums.artistid
 INNER JOIN tracks ON tracks.albumid = albums.albumid
 WHERE artists.name = 'Audioslave'
