@@ -1,0 +1,81 @@
+This is my way of doing it. Using for reference after you have tried it yourself. :D
+
+1.Using a subquery, find the names of all the tracks for the album "Californication".
+
+SELECT tracks.name, albums.title
+FROM tracks
+INNER JOIN albums ON albums.albumid = tracks.albumid
+WHERE albums.title = 'Californication'
+
+What is the title of the 8th track?
+-> Porcelain
+
+2. Find the total number of invoices for each customer along with the customer's full name, city and email.
+
+SELECT customers.lastname, 
+customers.firstname, 
+customers.city, 
+customers.email, 
+invoices.total 
+FROM customers
+INNER JOIN invoices 
+ON invoices.customerid = customers.customerid
+GROUP BY customers.customerid
+
+After running the query described above, what is the email address of the 5th person, František Wichterlová? Enter the answer below (feel free to copy and paste).
+-> frantisekw@jetbrains.com
+
+3. Retrieve the track name, album, artistID, and trackID for all the albums.
+
+SELECT tracks.name, tracks.trackid, albums.artistid, albums.title
+FROM tracks
+INNER JOIN albums 
+ON albums.albumid = tracks.albumid 
+WHERE albums.title = 'For Those About To Rock We Salute You'
+
+What is the song title of trackID 12 from the "For Those About to Rock We Salute You" album? Enter the answer below.
+-> Breaking The Rules
+
+4. Retrieve a list with the managers last name, and the last name of the employees who report to him or her.
+
+SELECT m.lastname AS manager, 
+       e.lastname AS employee
+FROM employees e 
+INNER JOIN employees m 
+ON e.reportsTo = m.employeeid
+
+After running the query described above, who are the reports for the manager named Mitchell (select all that apply)?
+-> King , Callahan
+
+5. Find the name and ID of the artists who do not have albums. 
+
+SELECT artists.name, artists.artistid, albums.title
+FROM artists 
+LEFT JOIN albums 
+ON albums.artistid = artists.artistid
+WHERE albums.title is NULL
+
+After running the query described above, two of the records returned have the same last name. Enter that name below.
+-> Gilberto
+
+6. Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order.
+
+SELECT firstname, lastname
+FROM employees
+UNION
+SELECT firstname, lastname
+FROM customers
+ORDER BY lastname DESC
+
+After running the query described above, determine what is the last name of the 6th record? Enter it below. Remember to order things in descending order to be sure to get the correct answer.
+-> Taylor
+
+7. See if there are any customers who have a different city listed in their billing city versus their customer city.
+
+SELECT customers.customerid, customers.firstname, customers.lastname, customers.city
+FROM customers 
+LEFT JOIN invoices 
+ON invoices.billingcity = customers.city
+WHERE invoices.billingcity is NULL
+
+-> No customers have a different city listed in their billing city versus customer city.
